@@ -1,4 +1,4 @@
-export function filter<T>(f: (x: T) => boolean, xs: T[]): any {
+export function filter<T>(f: (x: T) => boolean, xs: T[]) {
     if (xs.length === 0) {
         return [];
     }

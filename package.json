@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --watchAll"
   },
-  "author": "",
+  "author": "Pablo Rodríguez",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^24.0.18",

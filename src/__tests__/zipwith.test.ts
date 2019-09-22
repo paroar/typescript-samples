@@ -7,17 +7,30 @@ describe("zipwith test", function(){
         expect(zipwith(add, [5,6], [1,2,4])).toEqual([6,8]);
         expect(zipwith(add, [], [1,2,4])).toEqual([]);
         expect(zipwith(add, [5,6,10], [1,2,4])).toEqual([6,8,14]);
+        expect(zipwith(add, ["1","2","4"], [5,6])).toEqual(["15","26"]);
+        expect(zipwith(add, ["5","6"], ["1","2","4"])).toEqual(["51","62"]);
+        expect(zipwith(add, [], ["1","2","4"])).toEqual([]);
+        expect(zipwith(add, ["5","6","10"], ["1","2","4"])).toEqual(["51","62","104"]);
     });
     it("Max elements of both arrays by position", function(){
         expect(zipwith(max, [1,2,4], [5,6])).toEqual([5,6]);
         expect(zipwith(max, [5,6], [1,2,4])).toEqual([5,6]);
         expect(zipwith(max, [], [1,2,4])).toEqual([]);
         expect(zipwith(max, [5,6,10], [1,2,4])).toEqual([5,6,10]);
+        expect(zipwith(max, ["1","2","4"], [5,6])).toEqual([5,6]);
+        expect(zipwith(max, ["5","6"], ["1","2","4"])).toEqual(["5","6"]);
+        expect(zipwith(max, [], ["1","2","4"])).toEqual([]);
+        expect(zipwith(max, ["5","6","10"], ["1","2","4"])).toEqual(["5","6","4"]);
+        
     });
     it("Pair elements of both arrays by position", function(){
         expect(zipwith(pair, [1,2,4], [5,6])).toEqual([[1,5],[2,6]]);
         expect(zipwith(pair, [5,6], [1,2,4])).toEqual([[5,1],[6,2]]);
         expect(zipwith(pair, [], [1,2,4])).toEqual([]);
         expect(zipwith(pair, [5,6,10], [1,2,4])).toEqual([[5,1],[6,2],[10,4]]);
+        expect(zipwith(pair, ["1","2","4"], [5,6])).toEqual([["1",5],["2",6]]);
+        expect(zipwith(pair, ["5","6"], ["1","2","4"])).toEqual([["5","1"],["6","2"]]);
+        expect(zipwith(pair, [], ["1","2","4"])).toEqual([]);
+        expect(zipwith(pair, ["5","6","10"], ["1","2","4"])).toEqual([["5","1"],["6","2"],["10","4"]]);
     });
 })

@@ -1,10 +1,10 @@
-export function reduce<T, R, V>(f: (x: T, y: R) => V, xs: any[], acum?: any):any {
+export function reduce<T, R>(f: (x: T, y: T | R) => T, xs: R[], acum?: any) {
     if (xs.length === 0) {
-        return acum;
+        return (typeof acum === 'undefined' ? 0 : acum);
     }
     return f(reduce(f, xs.slice(1), acum), xs[0]);
     /*
-    let current = acum;
+    let current = (typeof acum === 'undefined') ? 0 : acum;
     for(let x of xs){
         current = f(current, x);
     }
