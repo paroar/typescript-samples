@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "repository": {
+    "url": "",
+    "type": "git"
+  },
   "scripts": {
-    "test": "jest --watchAll"
+    "dev": "nodemon -e ts -w src --exec \"tsc --outDir dist src/*.ts && node dist/mapReducer.js\"",
+    "test": "jest --watch"
   },
   "author": "Pablo Rodríguez",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.5",
     "jest": "^24.9.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.6.3"
