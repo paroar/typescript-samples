@@ -1,5 +1,5 @@
 import { reduce } from "./reduce";
-import { inc } from "./utility_functions";
+import { inc, double } from "./utility_functions";
 
 var mapReducer = function <T, R>(f: (x: T) => R) {
     return function (xs) {
@@ -12,3 +12,4 @@ export function map<T, R>(f: (x: T) => R, xs: T[]) {
 }
 
 console.log(map(inc, [1, 2, 3, 4]));
+console.log(map(double, [1, 2, 3, 4]));
