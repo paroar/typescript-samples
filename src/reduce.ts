@@ -1,17 +1,17 @@
-/*export function reduce<T, R>(f: (x: T, y: T | R) => T, xs: R[], acum?: any) {
+import { type } from "os";
+
+export function reduce<T, R>(f: (acc: R, x: T) => R, xs: T[], init?: R): R {
     if (xs.length === 0) {
-        return (typeof acum === 'undefined' ? 0 : acum);
+        if(init === 'undefined' && typeof xs[0] === 'number'){
+            return 0;
+        }else if(typeof xs[0] === 'string'){
+            return "";
+        }
+        return init;
     }
-    return f(reduce(f, xs.slice(1), acum), xs[0]);
-
-    let current = (typeof acum === 'undefined') ? 0 : acum;
-    for(let x of xs){
-        current = f(current, x);
-    }
-    return current;
-
-}*/
-
+    return f(reduce(f, xs.slice(1), init), xs[0]);
+}
+/*
 export function reduce<T, R>(f: (acc: R, x: T) => R, xs: T[], init?: R) {
     var result;
     if (init == undefined && arguments.length == 2) {
@@ -26,4 +26,4 @@ export function reduce<T, R>(f: (acc: R, x: T) => R, xs: T[], init?: R) {
         result = f(result as any, xs[i]);
     }
     return result;
-}
+}*/
