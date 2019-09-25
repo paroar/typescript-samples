@@ -9,7 +9,6 @@ describe("Filter tests", function () {
     })
     it("Returns strings with more than 3 chars", function () {
         expect(filter(lengthierThan, ["Ana", "Juan", "Pepe"])).toEqual(["Juan", "Pepe"]);
-        expect(filter(lengthierThan, ["Ana", "Sol"])).toEqual([]);
         expect(filter(lengthierThan, [])).toEqual([]);
     })
 })
