@@ -1,4 +1,4 @@
-export function map<T, R>(f: (x: T) => R, xs: T[]) {
+export function map<T, R>(f: (x: T) => R, xs: T[]):R[] {
     if (xs.length === 0) {
         return [];
     }

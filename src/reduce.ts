@@ -1,12 +1,5 @@
-import { type } from "os";
-
-export function reduce<T, R>(f: (acc: R, x: T) => R, xs: T[], init?: R): R {
+export function reduce<T, R>(f: (acc: R, x: T) => R, xs: T[], init: R): R {
     if (xs.length === 0) {
-        if(init === 'undefined' && typeof xs[0] === 'number'){
-            return 0;
-        }else if(typeof xs[0] === 'string'){
-            return "";
-        }
         return init;
     }
     return f(reduce(f, xs.slice(1), init), xs[0]);
