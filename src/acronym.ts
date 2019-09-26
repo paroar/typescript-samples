@@ -1,4 +1,4 @@
-import { lengthierThan, union, initial, specialChars, plural, cap } from "./utility_functions";
+import { lengthierThan, union, initial, specialChars, repeat, upper } from "./utility_functions";
 import { compose, map, filter, split, join } from "ramda";
 
 export var acronymize = (phrase: string, separator = "", capitalize = true, pluralize = false): string => {
@@ -10,8 +10,8 @@ export var acronymize = (phrase: string, separator = "", capitalize = true, plur
     var ys = compose(
         join(''),
         map(union(separator)),
-        map(plural(pluralize)),
-        map(cap(capitalize)),
+        map(repeat(pluralize)),
+        map(upper(capitalize)),
         map(initial),
     )(xs);
     return ys;

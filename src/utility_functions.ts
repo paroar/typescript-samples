@@ -15,8 +15,8 @@ export var specialChars = (xs: string) => xs.replace(/[^a-zA-Z áéíóú]/g, ""
 export var duplicate = (xs: string) => xs + xs;
 export var union = (xs: string) => (ys: string) => ys + xs;
 export var initial = (xs: string) => xs.charAt(0);
-export var plural = (y: boolean) => (xs: string) => y ? xs + xs : xs;
-export var cap = (y: boolean) => (xs: string) => y ? xs.toUpperCase() : xs;
+export var repeat = (y: boolean) => (xs: string) => y ? xs + xs : xs;
+export var upper = (y: boolean) => (xs: string) => y ? xs.toUpperCase() : xs;
 
 export var product = <T, R>(xs: T[], ys: R[]) => {
     var zs = [];
