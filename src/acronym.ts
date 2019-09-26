@@ -12,7 +12,7 @@ export var acronymize = (phrase: string, separator = "", capitalize = true, plur
         map(union(separator)),
         map(repeat(pluralize)),
         map(upper(capitalize)),
-        map(initial),
+        map(initial)
     )(xs);
     return ys;
 }
