@@ -1,4 +1,4 @@
-import { acronymize, product } from "../utility_functions";
+import { acronymize } from "../acronym";
 
 describe("Acronym tests", function () {
   it("should return the acronym with default parameters", function () {
@@ -22,11 +22,5 @@ describe("Acronym tests", function () {
   });
   it("should pluralize", function () {
     expect(acronymize("Estados Unidos", "", true, true)).toEqual("EEUU");
-  });
-  it("should return an array with the cartesian product", function () {
-    expect(product([1, 2, 3], [1, 2])).toEqual([[1, 1], [1, 2], [2, 1], [2, 2], [3, 1], [3, 2]]);
-  });
-  it("should return an array with the cartesian product", function () {
-    expect(product([1, 2, 3], ["a", "b"])).toEqual([[1, "a"], [1, "b"], [2, "a"], [2, "b"], [3, "a"], [3, "b"]]);
   });
 });

@@ -10,18 +10,13 @@ export var add = (x: number, y: number) => x + y;
 export var max = (x: number, y: number) => x > y ? x : y;
 export var pair = <T, R>(x: T, y: R): [T, R] => [x, y];
 export var not = <T>(f: any, x: T) => !f(x);
-
-export var specialChars = (x: string) => x.replace(/[^a-zA-Z ]/g, "");
-
-export var acronymize = (phrase: string, separator = "", capitalize = true, pluralize = false): string => {
-    var xs = specialChars(phrase)
-        .split(" ")
-        .filter(lengthierThan)
-        .map(x => x.charAt(0));
-    if (capitalize) xs = xs.map(x => x.toUpperCase());
-    if (pluralize) xs = xs.map(x => x += x);
-    return xs.map(x => x + separator).join('');
-}
+export var minus = (x: number, y: number) => x - y;
+export var specialChars = (xs: string) => xs.replace(/[^a-zA-Z áéíóú]/g, "");
+export var duplicate = (xs: string) => xs + xs;
+export var union = (xs: string) => (ys: string) => ys + xs;
+export var initial = (xs: string) => xs.charAt(0);
+export var plural = (y: boolean) => (xs: string) => y ? xs + xs : xs;
+export var cap = (y: boolean) => (xs: string) => y ? xs.toUpperCase() : xs;
 
 export var product = <T, R>(xs: T[], ys: R[]) => {
     var zs = [];
