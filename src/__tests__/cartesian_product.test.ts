@@ -13,4 +13,7 @@ describe("Should return the cartesian product", function () {
     it("[1, 2],['a','b']=>[[1,'a'],[1,'b'],[2,'a'],[2,'b']]", function () {
         expect(product([1, 2], ['a', 'b'])).toEqual([[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]);
     });
+    it("[1, 2],[]=>[]", function () {
+        expect(product([1, 2], [])).toEqual([]);
+    });
 })
