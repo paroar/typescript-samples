@@ -17,13 +17,4 @@ export var union = (xs: string) => (ys: string) => ys + xs;
 export var initial = (xs: string) => xs.charAt(0);
 export var repeat = (y: boolean) => (xs: string) => y ? xs + xs : xs;
 export var upper = (y: boolean) => (xs: string) => y ? xs.toUpperCase() : xs;
-
-export var product = <T, R>(xs: T[], ys: R[]) => {
-    var zs = [];
-    for (let x of xs) {
-        for (let y of ys) {
-            zs.push([x, y]);
-        }
-    }
-    return zs;
-}
+export var cartesian = <T, R>(y: T[]) => (x: R) => y.map(y => [x, y]);

@@ -8,7 +8,7 @@
     "type": "git"
   },
   "scripts": {
-    "dev": "nodemon -e ts -w src --exec \"tsc --outDir dist src/*.ts && node dist/reduce.js\"",
+    "dev": "nodemon -e ts -w src --exec \"tsc --outDir dist src/*.ts && node dist/cartesian_product.js\"",
     "test": "jest --watch"
   },
   "author": "Pablo Rodríguez",
