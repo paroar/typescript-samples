@@ -2,17 +2,19 @@ import { lengthierThan, union, initial, specialChars, repeat, upper } from "./ut
 import { compose, map, filter, split, join } from "ramda";
 
 export var acronymize = (phrase: string, separator = "", capitalize = true, pluralize = false): string => {
+    var transform = compose(
+        union(separator),
+        repeat(pluralize),
+        upper(capitalize),
+        initial
+    );
     var xs = compose(
-        filter(lengthierThan),
+        join(''),
+        map(transform),
+        filter(lengthierThan(3)),
         split(" "),
         specialChars
     )(phrase);
-    var ys = compose(
-        join(''),
-        map(union(separator)),
-        map(repeat(pluralize)),
-        map(upper(capitalize)),
-        map(initial)
-    )(xs);
-    return ys;
+
+    return xs;
 }
