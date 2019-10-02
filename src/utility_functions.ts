@@ -1,3 +1,5 @@
+import { map } from "ramda";
+
 export var inc = (x: number) => x + 2;
 export var double = (x: number) => x * 2;
 export var isOdd = (x: number) => x % 2 != 0;
@@ -17,4 +19,5 @@ export var union = (xs: string) => (ys: string) => ys + xs;
 export var initial = (xs: string) => xs.charAt(0);
 export var repeat = (y: boolean) => (xs: string) => y ? xs + xs : xs;
 export var upper = (y: boolean) => (xs: string) => y ? xs.toUpperCase() : xs;
-export var cartesian = <T, R>(ys: T[]) => (x: R) => ys.map(y => [x, y]);
+//export var cartesian = <T, R>(ys: T[]) => (x: R) => ys.map(y => [x, y]);
+export var cartesian = <T, R, S>(f: (x: T, y: R) => S, ys: R[]) => (x: T): S[] => ys.map(y => f(x, y));
