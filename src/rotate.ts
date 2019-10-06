@@ -1,5 +1,3 @@
-import { compose } from "ramda";
-
 var head = <T>(xs: T[]): T => xs[0];
 var tail = <T>(xs: T[]): T[] => xs.slice(1);
 var append = <T>(x: T) => (xs: T[]): T[] => xs.concat(x);
