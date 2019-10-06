@@ -1,5 +1,5 @@
 export const splitChar = (xs: string): string[] => xs.split("");
-export const mapChar = (xs: string[]) => {
+export const mapChar = (xs: string[]): object => {
     let o = {};
     for (let x of xs) {
         //@ts-ignore
@@ -7,7 +7,7 @@ export const mapChar = (xs: string[]) => {
     };
     return o;
 }
-export const mapToArray = (os: object) => {
+export const mapToArray = <T>(os: object):T[][] => {
     //@ts-ignore
     return Object.keys(os).map(x => [x, os[x]]);
 }
