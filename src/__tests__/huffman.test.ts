@@ -1,4 +1,4 @@
-import { mapChar, mapToArray, splitChar, huffman } from "../huffman";
+import { mapChar, mapToArray, splitChar, huffman, sortArr } from "../huffman";
 import compose from "ramda";
 
 describe("splitChar test", function () {
@@ -19,7 +19,7 @@ describe("mapToArray test", function () {
     });
 });
 
-describe("huffman test", function () {
+/*describe("huffman test", function () {
     it("Should return array of arrays with chars and number of repetitions", function () {
         expect(
             huffman(compose(
@@ -28,5 +28,14 @@ describe("huffman test", function () {
                 splitChar
             ))("HOLA")
         ).toEqual("");
+    });
+});*/
+
+describe("huffman test", function () {
+    it("Should return array of arrays with chars and number of repetitions", function () {
+        expect([["H", 1], ["o", 2], ["l", 1], ["a", 1]].sort(sortArr)).toEqual([["o", 2], ["a", 1], ["l", 1], ["H", 1]]);
+    });
+    it("Should return array of arrays with chars and number of repetitions", function () {
+        expect([["H", 1], ["o", 0], ["l", 1], ["a", 3]].sort(sortArr)).toEqual([["a", 3], ["l", 1], ["H", 1], ["o", 0]]);
     });
 });
