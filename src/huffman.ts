@@ -17,26 +17,42 @@ export const sortArr = (xs: (string | number)[], ys: (string | number)[]): numbe
     return (xs[1] > ys[1] ? -1 : 1);
 }
 
-export const linkedList = (xs:any) => {
-    let o = {
-        next: undefined
-    };
-    if(xs.length == 0){
-        return o;
-    }else{
-        o[xs[0][0]] = xs[0][1];
-
+class Node {
+    constructor(data: any, next = null) {
+        //@ts-ignore
+        this.data = data;
+        //@ts-ignore
+        this.next = next;
     }
 }
 
-/*
 class LinkedList {
-    constructor(){
+    constructor() {
+        //@ts-ignore
         this.head = null;
-        this.size = 0;
+
+    }
+    //@ts-ignore
+    insertAtBeginning(data) {
+        let newNode = new Node(data);
+        //@ts-ignore
+        newNode.next = this.head;
+        //@ts-ignore
+        this.head = newNode;
+        //@ts-ignore
+        return this.head;
     }
 
-    insertLast(data){
-        this.head = new NodeJS()
+    binaryInsertAtEnd(datax, datay){
+        let newNode = new Node(data);
+        //TODO
     }
-}*/
+}
+
+export const arrayToList = (xs: (string | number)[][]): object => {
+    let list = new LinkedList();
+    for (let x of xs) {
+        list.insertAtBeginning(x);
+    }
+    return list;
+}

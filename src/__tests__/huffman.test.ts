@@ -1,4 +1,4 @@
-import { mapChar, mapToArray, splitChar, huffman, sortArr } from "../huffman";
+import { mapChar, mapToArray, splitChar, huffman, sortArr, arrayToList } from "../huffman";
 import compose from "ramda";
 
 describe("splitChar test", function () {
@@ -37,5 +37,14 @@ describe("huffman test", function () {
     });
     it("Should return array of arrays with chars and number of repetitions", function () {
         expect([["H", 1], ["o", 0], ["l", 1], ["a", 3]].sort(sortArr)).toEqual([["a", 3], ["l", 1], ["H", 1], ["o", 0]]);
+    });
+});
+
+describe("LinkedList test", function () {
+    it("Should return linkedList of array", function () {
+        expect(arrayToList([["o", 2], ["a", 1], ["l", 1], ["H", 1]])).toEqual("");
+    });
+    it("Should return linkedList of array", function () {
+        expect(arrayToList([["a", 3], ["l", 1], ["H", 1], ["o", 0]])).toEqual("");
     });
 });
