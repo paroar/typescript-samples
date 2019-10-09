@@ -1,3 +1,5 @@
+import { chain } from "ramda";
+
 export const splitChar = (xs: string): string[] => xs.split("");
 export const mapChar = (xs: string[]): object => {
     let o = {};
@@ -14,45 +16,127 @@ export const mapToArray = <T>(os: object): T[][] => {
 export const huffman = <T>(f: (x: string) => T[][]) => (x: string) => f(x);
 
 export const sortArr = (xs: (string | number)[], ys: (string | number)[]): number => {
-    return (xs[1] > ys[1] ? -1 : 1);
+    return (xs[1] > ys[1] ? 1 : -1);
 }
 
-class Node {
-    constructor(data: any, next = null) {
+export const reduce = (xs: any) => {
+    let times = xs.length - 1;
+    for (let i = 0; i < times; i++) {
         //@ts-ignore
+        let ys = [null, xs[0][1] + xs[1][1], xs[0], xs[1]];
+        xs.push(ys);
+        xs.sort(sortArr);
+        xs = xs.slice(2);
+    }
+    return xs;
+}
+
+export const binary = (xs: any) => {
+    return xs;
+}
+
+export const simplify = (xs: any)=>{
+    while(typeof(xs[0]) != "object" || xs[0] == null){
+        xs = xs.slice(1);
+    }
+    return xs;
+}
+
+
+//USELESS P*OOP
+/*
+export class Node {
+    data: any;
+    right: Node | null;
+    left: Node | null;
+    constructor(data: any, right = null, left = null) {
         this.data = data;
-        //@ts-ignore
-        this.next = next;
+        this.right = right;
+        this.left = left;
     }
 }
 
-class LinkedList {
+export class LinkedList {
+    head: Node | null;
     constructor() {
-        //@ts-ignore
         this.head = null;
-
     }
-    //@ts-ignore
-    insertAtBeginning(data) {
+
+    insertAtBeginning(data: any) {
         let newNode = new Node(data);
-        //@ts-ignore
-        newNode.next = this.head;
-        //@ts-ignore
+        newNode.right = this.head;
         this.head = newNode;
-        //@ts-ignore
         return this.head;
     }
 
-    binaryInsertAtEnd(datax, datay){
+    insertAtEnd(data: any) {
         let newNode = new Node(data);
-        //TODO
+        if (this.head == null) {
+            this.head = newNode;
+            return this;
+        }
+        let p = this.head;
+        while (p.right != null) {
+            p = p.right;
+        }
+        p.right = newNode;
+        return this;
     }
+
+    deleteBeginning() {
+        if (this.head == null) {
+            return this;
+        }
+        this.head = this.head.right;
+        return this;
+    }
+
+    binaryInsert(dataR: Node, dataL: Node) {
+        let newData = dataR.data[1] + dataL.data[1];
+        let nodeR = new Node(dataR.data);
+        let nodeL = new Node(dataL.data);
+        this.insertAtEnd(newData);
+        return this;
+    }
+
+    times() {
+        let i = 0;
+        let p = this.head;
+        while (p != null) {
+            i++;
+            p = p.right;
+        }
+        return --i;
+    }
+
+    reduce() {
+        if (this.head == null) {
+            return this;
+        }
+        let p = this.head;
+        if (p.right == null) {
+            return this;
+        }
+        let q = p.right;
+        let times = this.times();
+        for (let i = 0; i < times; i++) {
+            this.binaryInsert(p, q);
+            this.deleteBeginning();
+            this.deleteBeginning();
+            p = this.head;
+            //@ts-ignore
+            q = p.right;
+        }
+        return this;
+    }
+
 }
 
-export const arrayToList = (xs: (string | number)[][]): object => {
+export const arrayToList = (xs: (string | number)[][]): LinkedList => {
     let list = new LinkedList();
     for (let x of xs) {
         list.insertAtBeginning(x);
     }
     return list;
 }
+*/
