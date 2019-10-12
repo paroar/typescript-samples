@@ -13,35 +13,50 @@ export const mapToArray = <T>(os: object): T[][] => {
     return Object.entries(os);
 }
 
-export const huffman = <T>(f: (x: string) => T[][]) => (x: string) => f(x);
-
 export const sortArr = (xs: (string | number)[], ys: (string | number)[]): number => {
     return (xs[1] > ys[1] ? 1 : -1);
 }
 
 export const reduce = (xs: any) => {
     let times = xs.length - 1;
+    let ys = xs.slice();
     for (let i = 0; i < times; i++) {
         //@ts-ignore
-        let ys = [null, xs[0][1] + xs[1][1], xs[0], xs[1]];
-        xs.push(ys);
-        xs.sort(sortArr);
-        xs = xs.slice(2);
+        let sum = ys[0][1] + ys[1][1];
+        let zs = [null, sum, ys[0], ys[1]];
+        ys.push(zs);
+        ys.sort(sortArr);
+        ys = ys.slice(2);
     }
-    return xs;
+    ys = chain(x => x, ys);
+    return ys;
 }
 
-export const binary = (xs: any) => {
-    return xs;
+export const isIn = <T>(y: String, xs: T[]) => {
+    //@ts-ignore
+    return (xs.indexOf(y) < 0 ? false : true);
 }
 
-export const simplify = (xs: any)=>{
-    while(typeof(xs[0]) != "object" || xs[0] == null){
-        xs = xs.slice(1);
+//@ts-ignore
+export const scan = <T>(xs: T[], y: char, pos: number[]): number[] => {
+    if (isIn(y, xs)) {
+        return pos;
     }
-    return xs;
+
+    if (xs.length == 2) {
+        pos.pop();
+        //@ts-ignore
+        return;
+    }
+    //@ts-ignore
+    return scan(xs[2], y, pos.slice().concat([2])) || scan(xs[3], y, pos.slice().concat([3]));
 }
 
+export const binary = <T,R,S>(f:T):number[]=> (xs:R[]) => (ys:S[]) => {
+    return ys.map(x: R[]=>x[0].concat(f(xs,x[0],[])));
+};
+
+export const huffman = <T>(f: (x: string) => T[][]) => (x: string) => f(x);
 
 //USELESS P*OOP
 /*

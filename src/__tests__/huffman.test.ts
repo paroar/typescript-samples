@@ -1,5 +1,5 @@
-import { mapChar, mapToArray, splitChar, sortArr, reduce, binary } from "../huffman";
-
+import { mapChar, mapToArray, splitChar, sortArr, reduce, scan } from "../huffman";
+/*
 let x = "Hola";
 describe("splitChar test", function () {
     it("Should return array of chars from string", function () {
@@ -18,8 +18,8 @@ describe("mapToArray test", function () {
         expect(mapToArray(mapChar(splitChar(x)))).toEqual([["H", 1], ["o", 1], ["l", 1], ["a", 1]]);
     });
 });
-/*
-let arr = mapToArray(mapChar(splitChar(x)));
+
+
 describe("huffman test", function () {
     it("Should return sorted array", function () {
         //@ts-ignore
@@ -27,20 +27,33 @@ describe("huffman test", function () {
     });
 });
 */
-/*
+
 //@ts-ignore
-let arr = mapToArray(mapChar(splitChar("BBBanana"))).sort(sortArr);
+let arr = reduce(mapToArray(mapChar(splitChar("laptop"))).sort(sortArr));
+/*
 describe("reduce test", function () {
     it("Should return reduced array", function () {
         expect(reduce(arr)).toEqual("");
     });
 });
 */
+
 //@ts-ignore
-let arr = reduce(mapToArray(mapChar(splitChar("sol"))).sort(sortArr));
-describe("binary test", function () {
-    it("Should return binary translation", function () {
-        expect(binary(arr)).toEqual("");
+describe("search test", function () {
+    it("Should return t index", function () {
+        expect(scan(arr, "t", [])).toEqual([2,2]);
+    });
+    it("Should return o index", function () {
+        expect(scan(arr, "o", [])).toEqual([2,3]);
+    });
+    it("Should return p index", function () {
+        expect(scan(arr, "p", [])).toEqual([3,2]);
+    });
+    it("Should return l index", function () {
+        expect(scan(arr, "l", [])).toEqual([3,3,2]);
+    });
+    it("Should return a index", function () {
+        expect(scan(arr, "a", [])).toEqual([3,3,3]);
     });
 });
 
