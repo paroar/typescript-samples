@@ -1,6 +1,7 @@
-import { chain } from "ramda";
+import { chain, compose, sort } from "ramda";
 
 export const splitChar = (xs: string): string[] => xs.split("");
+
 export const mapChar = (xs: string[]): object => {
     let o = {};
     for (let x of xs) {
@@ -9,19 +10,16 @@ export const mapChar = (xs: string[]): object => {
     };
     return o;
 }
-export const mapToArray = <T>(os: object): T[][] => {
-    return Object.entries(os);
-}
 
-export const sortArr = (xs: (string | number)[], ys: (string | number)[]): number => {
-    return (xs[1] > ys[1] ? 1 : -1);
-}
+export const mapToArray = <T>(os: object): T[][] => Object.entries(os);
+export const sortArr = (xs: (string | number)[]) => (ys: (string | number)[]): number => (xs[1] > ys[1] ? 1 : -1);
 
-export const reduce = (xs: any) => {
+export const reduce = <T>(xs: T): T => {
+    //@ts-ignore
     let times = xs.length - 1;
+    //@ts-ignore
     let ys = xs.slice();
     for (let i = 0; i < times; i++) {
-        //@ts-ignore
         let sum = ys[0][1] + ys[1][1];
         let zs = [null, sum, ys[0], ys[1]];
         ys.push(zs);
@@ -32,31 +30,62 @@ export const reduce = (xs: any) => {
     return ys;
 }
 
-export const isIn = <T>(y: String, xs: T[]) => {
+//@ts-ignore
+export const isIn = <T, R>(y: R) => (xs: T[]) => (xs.indexOf(y) < 0 ? false : true);
+
+export const scan = <T>(xs: T[], y: String, pos: number[]): String => {
+    if (isIn(y)(xs)) {
+        return String(pos).replace(/,/g, "");
+    }
+    if (xs.length == 2) {
+        pos.pop();
+        return "";
+    }
     //@ts-ignore
-    return (xs.indexOf(y) < 0 ? false : true);
+    return scan(xs[2], y, pos.slice().concat([0])) || scan(xs[3], y, pos.slice().concat([1]));
 }
 
 //@ts-ignore
-export const scan = <T>(xs: T[], y: char, pos: number[]): number[] => {
-    if (isIn(y, xs)) {
-        return pos;
-    }
+export const binary = <T, R, S>(f: (xs: T, ys: R, []) => S, ys: R[]) => (xs: T) => ys.map(x => [x[0], f(xs, x[0], [])]);
 
-    if (xs.length == 2) {
-        pos.pop();
+export const huffman = (x: string) => {
+    let sorted = compose(
         //@ts-ignore
-        return;
-    }
-    //@ts-ignore
-    return scan(xs[2], y, pos.slice().concat([2])) || scan(xs[3], y, pos.slice().concat([3]));
+        sort(sortArr),
+        mapToArray,
+        mapChar,
+        splitChar)
+        (x);
+
+    return compose(
+        //@ts-ignore
+        binary(scan, sorted),
+        reduce,
+        //@ts-ignore
+        sort(sortArr),
+        mapToArray,
+        mapChar,
+        splitChar)
+        (x)
 }
 
-export const binary = <T,R,S>(f:T):number[]=> (xs:R[]) => (ys:S[]) => {
-    return ys.map(x: R[]=>x[0].concat(f(xs,x[0],[])));
-};
+export const conversion = (xs: any, ys: string) => {
+    let translate = "";
+    let zs = ys.slice(0);
+    let tmp = "";
+    while (zs.length > 0) {
+        tmp += zs.slice(0, 1);
+        zs = zs.slice(1);
+        //@ts-ignore
+        var cmp = xs.filter(y => y[1] == tmp);
+        if (typeof cmp[0] != "undefined") {
+            translate += cmp[0][0];
+            tmp = "";
+        }
+    }
+    return translate;
+}
 
-export const huffman = <T>(f: (x: string) => T[][]) => (x: string) => f(x);
 
 //USELESS P*OOP
 /*
