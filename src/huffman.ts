@@ -12,7 +12,8 @@ export const mapChar = (xs: string[]): object => {
 }
 
 export const mapToArray = <T>(os: object): T[][] => Object.entries(os);
-export const sortArr = (xs: (string | number)[]) => (ys: (string | number)[]): number => (xs[1] > ys[1] ? 1 : -1);
+//@ts-ignore
+export const sortArr = <T, R>(xs: T[], ys: R[]): number => (xs[1] > ys[1] ? 1 : -1);
 
 export const reduce = <T>(xs: T): T => {
     //@ts-ignore
@@ -33,16 +34,15 @@ export const reduce = <T>(xs: T): T => {
 //@ts-ignore
 export const isIn = <T, R>(y: R) => (xs: T[]) => (xs.indexOf(y) < 0 ? false : true);
 
-export const scan = <T>(xs: T[], y: String, pos: number[]): String => {
+export const scan = <T, R>(xs: T[], y: R, pos: number[]): string => {
     if (isIn(y)(xs)) {
         return String(pos).replace(/,/g, "");
     }
     if (xs.length == 2) {
-        pos.pop();
         return "";
     }
     //@ts-ignore
-    return scan(xs[2], y, pos.slice().concat([0])) || scan(xs[3], y, pos.slice().concat([1]));
+    return scan(xs[2], y, pos.concat([0])) || scan(xs[3], y, pos.concat([1]));
 }
 
 //@ts-ignore

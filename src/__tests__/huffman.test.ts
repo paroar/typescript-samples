@@ -41,7 +41,7 @@ describe("sort test", function () {
                 mapChar,
                 splitChar)
                 ("laptop")
-        ).toEqual([["l", 1], ["a", 1], ["p", 2], ["t", 1], ["o", 1]]);
+        ).toEqual([["l", 1], ["a", 1], ["t", 1], ["o", 1], ["p", 2]]);
     });
 });
 
@@ -57,21 +57,21 @@ describe("reduce test", function () {
                 mapChar,
                 splitChar)
                 ("laptop")
-        ).toEqual([null, 6, [null, 3, ["p", 2], ["t", 1]], [null, 3, ["o", 1], [null, 2, ["l", 1], ["a", 1]]]]);
+        ).toEqual([null, 6, [null, 2, ["t", 1], ["o", 1]], [null, 4, ["p", 2], [null, 2, ["l", 1], ["a", 1]]]]);
     });
 });
 
 describe("huffman test", function () {
     it("Should return binary tree", function () {
-        expect(huffman("laptop")).toEqual([["l", "110"], ["a", "111"], ["p", "00"], ["t", "01"], ["o", "10"]]);
+        expect(huffman("laptop")).toEqual([["l", "110"], ["a", "111"], ["t", "00"], ["o", "01"], ["p", "10"]]);
     });
 });
 
 describe("conversion test", function () {
     it("Should return converted text", function () {
         expect(conversion(
-            [["l", "110"], ["a", "111"], ["p", "00"], ["t", "01"], ["o", "10"]],
-            "110111000110000"
+            [["l", "110"], ["a", "111"], ["t", "00"], ["o", "01"], ["p", "10"]],
+            "11011110000110"
         )).toEqual("laptop");
     });
 });
